@@ -4,5 +4,6 @@ Creating 2 API’s to Perform CRUD Operation same as Twitter / Facebook. In whic
 # so API's can be like this:
 
 
-piyush/user – methods (GET , POST , PUT , DELETE )
-piyush/user/wall – methods (GET , POST )
+## piyush/user – methods (GET , POST , PUT , DELETE )
+
+## piyush/user/wall – methods (GET , POST )
