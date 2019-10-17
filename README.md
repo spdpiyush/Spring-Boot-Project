@@ -9,4 +9,4 @@ Creating 2 API’s to Perform CRUD Operation same as Twitter / Facebook. In whic
 ## piyush/user/wall – methods (GET , POST )
 
 
-## We are also using Kafka to push some events or messages for every User Creation.
+------ We are also using Kafka to push some events or messages for every User Creation.
