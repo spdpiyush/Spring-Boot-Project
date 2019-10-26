@@ -9,3 +9,7 @@ Creating 2 API’s to Perform CRUD Operation same as Twitter / Facebook. In whic
 ## piyush/user/wall – methods (GET , POST )
 
 
+__Command to Build the Project__ 
+`mvn clean compile install`
+
+
