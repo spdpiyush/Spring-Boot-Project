@@ -1,14 +1,15 @@
 package com.piyush.demo.model;
 
+/**
+ * Created by : Piyush Kumar
+ */
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 
 @Entity
+@Table(name = "UserProfile", schema = "", catalog = "users")
 public class User implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -33,14 +34,13 @@ public class User implements Serializable {
         this.dob = dob;
     }
 
+
     public Integer getId() {
         return id;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
+    @Basic
+    @Column(name = "userName", nullable = false, insertable = true, updatable = true)
     public String getName() {
         return name;
     }
@@ -49,14 +49,19 @@ public class User implements Serializable {
         this.name = name;
     }
 
+    @Basic
+    @Column(name = "userAddress", nullable = false, insertable = true, updatable = true)
     public String getAddress() {
         return address;
     }
+
 
     public void setAddress(String address) {
         this.address = address;
     }
 
+    @Basic
+    @Column(name = "userContactNo", nullable = true, insertable = true, updatable = true)
     public String getContactNo() {
         return contactNo;
     }
@@ -65,6 +70,8 @@ public class User implements Serializable {
         this.contactNo = contactNo;
     }
 
+    @Basic
+    @Column(name = "userEmailId", nullable = false, insertable = true, updatable = true)
     public String getEmail() {
         return email;
     }
@@ -73,12 +80,28 @@ public class User implements Serializable {
         this.email = email;
     }
 
+    @Basic
+    @Column(name = "userDOB", nullable = false, insertable = true, updatable = true)
     public Date getDob() {
         return dob;
     }
 
     public void setDob(Date dob) {
         this.dob = dob;
+    }
+
+
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", address='" + address + '\'' +
+                ", contactNo='" + contactNo + '\'' +
+                ", email='" + email + '\'' +
+                ", dob=" + dob +
+                '}';
     }
 }
 
