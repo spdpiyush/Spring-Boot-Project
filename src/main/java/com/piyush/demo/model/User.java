@@ -14,8 +14,6 @@ public class User implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
     private String name;
     private String address;
@@ -35,6 +33,9 @@ public class User implements Serializable {
     }
 
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "UserId",nullable = false, insertable = false,updatable = false)
     public Integer getId() {
         return id;
     }
