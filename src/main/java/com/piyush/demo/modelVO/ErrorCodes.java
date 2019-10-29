@@ -8,7 +8,8 @@ public enum ErrorCodes {
 
 
         USER_ALREADY_EXIST(1000,"User Already Exist"),
-        USER_NOT_CREATED(1001,"Error in Creating the User");
+        USER_NOT_CREATED(1001,"Error in Creating the User"),
+        USERS_NOT_CREATED(1002,"Error in Creating List of Users");
 
         private final Integer value;
         private final String phrase;
