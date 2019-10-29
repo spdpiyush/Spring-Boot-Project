@@ -12,10 +12,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -43,8 +40,8 @@ public class UserController {
             LOGGER.info("User: {} saved",user);
         }catch (Exception e){
             LOGGER.error(String.valueOf(e.fillInStackTrace()));
-            status.setErrorCodes(ErrorCodes.USER_NOT_CREATED.getValue());
-            status.setMessage(ErrorCodes.USER_NOT_CREATED.toString());
+            status.setErrorCodes(ErrorCodes.ERROR_IN_PUT_USER.getValue());
+            status.setMessage(ErrorCodes.ERROR_IN_PUT_USER.toString());
         }
         return ResponseEntity.ok().body(status);
     }
@@ -62,9 +59,32 @@ public class UserController {
             }
         }catch (Exception e){
             LOGGER.error(String.valueOf(e.fillInStackTrace()));
-            status.setErrorCodes(ErrorCodes.USERS_NOT_CREATED.getValue());
-            status.setMessage(ErrorCodes.USERS_NOT_CREATED.toString());
+            status.setErrorCodes(ErrorCodes.ERROR_IN_PUT_USERS.getValue());
+            status.setMessage(ErrorCodes.ERROR_IN_PUT_USERS.toString());
         }
         return ResponseEntity.ok().body(status);
     }
+
+    //To Get a User By Its UserId
+    @RequestMapping(value = "/user/{userId}", method = RequestMethod.GET)
+    public ResponseEntity getUserById(@PathVariable Long userId) throws Exception{
+        LOGGER.info("Get User by its UserId Called");
+        try {
+            User user = userDao.findOne(userId);
+            if(user == null){
+                status.setErrorCodes(ErrorCodes.USER_NOT_PRESENT.getValue());
+                status.setMessage(ErrorCodes.USER_NOT_PRESENT.toString());
+                LOGGER.info("No User with that {} userId",userId);
+            }
+            else {
+                return ResponseEntity.ok().body(user);
+            }
+        }catch (Exception e){
+            LOGGER.error(String.valueOf(e.fillInStackTrace()));
+            status.setErrorCodes(ErrorCodes.ERROR_IN_GET_USER.getValue());
+            status.setMessage(ErrorCodes.ERROR_IN_GET_USER.toString());
+        }
+        return ResponseEntity.ok().body(status);
+    }
+
 }
