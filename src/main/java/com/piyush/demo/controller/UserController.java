@@ -87,4 +87,25 @@ public class UserController {
         return ResponseEntity.ok().body(status);
     }
 
+    //To Get all the Users
+    @RequestMapping(value = "/allusers", method = RequestMethod.GET)
+    public ResponseEntity getAll() throws Exception{
+        LOGGER.info("Get all User is Called");
+        try {
+            List<User> users = userDao.getAll();
+            if(users == null){
+                status.setErrorCodes(ErrorCodes.NO_USERS_PRESENT.getValue());
+                status.setMessage(ErrorCodes.NO_USERS_PRESENT.toString());
+                LOGGER.info("No Users Present");
+            }else {
+                return ResponseEntity.ok().body(users);
+            }
+        }catch (Exception e){
+            LOGGER.error(String.valueOf(e.fillInStackTrace()));
+            status.setErrorCodes(ErrorCodes.ERROR_IN_GET_USERS.getValue());
+            status.setMessage(ErrorCodes.ERROR_IN_GET_USERS.toString());
+        }
+        return ResponseEntity.ok().body(status);
+    }
+
 }
