@@ -108,4 +108,34 @@ public class UserController {
         return ResponseEntity.ok().body(status);
     }
 
+    //To Update the User
+    @RequestMapping(value = "/update/{userId}", method = RequestMethod.PUT)
+    public ResponseEntity updateuser(@PathVariable(value = "userId") Long userId,
+                                     @RequestBody User userDetails) throws Exception{
+        LOGGER.info("Update User is Called");
+        try {
+            User user = userDao.findOne(userId);
+            if(user == null){
+                status.setErrorCodes(ErrorCodes.USER_NOT_PRESENT.getValue());
+                status.setMessage(ErrorCodes.USER_NOT_PRESENT.toString());
+                LOGGER.info("UserId {} is not Present",userId);
+            }else {
+                user.setName(userDetails.getName());
+                user.setAddress(userDetails.getAddress());
+                user.setContactNo(userDetails.getContactNo());
+                user.setDob(userDetails.getDob());
+                user.setEmail(userDetails.getEmail());
+                userDao.save(user);
+                status.setErrorCodes(ErrorCodes.USER_UPDATED.getValue());
+                status.setMessage(ErrorCodes.USER_UPDATED.toString());
+                LOGGER.info("UserId {} has Been Updated",userId);
+                return ResponseEntity.ok().body(status);
+            }
+        }catch (Exception e){
+            LOGGER.error(String.valueOf(e.fillInStackTrace()));
+            status.setErrorCodes(ErrorCodes.ERROR_IN_USER_UPDATE.getValue());
+            status.setMessage(ErrorCodes.ERROR_IN_USER_UPDATE.toString());
+        }
+        return ResponseEntity.ok().body(status);
+    }
 }
