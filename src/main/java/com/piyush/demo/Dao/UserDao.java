@@ -37,4 +37,7 @@ public class UserDao {
         return userRepository.findAll();
     }
 
+    public void delete(User user){
+        userRepository.delete(user);
+    }
 }
