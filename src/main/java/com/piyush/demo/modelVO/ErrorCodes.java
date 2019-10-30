@@ -19,7 +19,7 @@ public enum ErrorCodes {
         USER_UPDATED(1009,"User Has Been Updated"),
         ERROR_IN_USER_UPDATE(2000,"Error Occurred in the User Update"),
         USER_DELETED(2001,"User Deleted Successfully"),
-        ERROR_IN_USER_DELETION(2002,"Error while deleting the User");
+        ERROR_IN_USER_DELETION(2002,"Error Occurred in deleting the User");
 
         private final Integer value;
         private final String phrase;
