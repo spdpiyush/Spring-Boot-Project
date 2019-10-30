@@ -17,7 +17,9 @@ public enum ErrorCodes {
         ERROR_IN_PUT_USER(1007,"Error Occurred to put a User"),
         ERROR_IN_PUT_USERS(1008,"Error 'Occurred' to put List of Users"),
         USER_UPDATED(1009,"User Has Been Updated"),
-        ERROR_IN_USER_UPDATE(1010,"Error Occurred in the User Update");
+        ERROR_IN_USER_UPDATE(2000,"Error Occurred in the User Update"),
+        USER_DELETED(2001,"User Deleted Successfully"),
+        ERROR_IN_USER_DELETION(2002,"Error while deleting the User");
 
         private final Integer value;
         private final String phrase;

@@ -138,4 +138,27 @@ public class UserController {
         }
         return ResponseEntity.ok().body(status);
     }
+
+    //To Delete an User
+    @RequestMapping(value = "delete/{userId}", method = RequestMethod.DELETE)
+    public ResponseEntity deleteUser(@PathVariable (value = "userId") Long userId) throws Exception{
+        LOGGER.info("Delete User is Callled");
+        try {
+            User user = userDao.findOne(userId);
+            if(user == null){
+                status.setErrorCodes(ErrorCodes.USER_NOT_PRESENT.getValue());
+                status.setMessage(ErrorCodes.USER_NOT_PRESENT.toString());
+                LOGGER.info("userId {} is not Present",userId);
+            }else {
+                userDao.delete(user);
+                status.setErrorCodes(ErrorCodes.USER_DELETED.getValue());
+                status.setMessage(ErrorCodes.USER_DELETED.toString());
+            }
+        }catch (Exception e){
+            LOGGER.error(String.valueOf(e.fillInStackTrace()));
+            status.setErrorCodes(ErrorCodes.ERROR_IN_USER_DELETION.getValue());
+            status.setMessage(ErrorCodes.ERROR_IN_USER_DELETION.toString());
+        }
+        return ResponseEntity.ok().body(status);
+    }
 }
