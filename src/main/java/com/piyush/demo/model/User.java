@@ -35,7 +35,7 @@ public class User implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "UserId",nullable = false, insertable = false,updatable = false)
+    @Column(name = "userId",nullable = false, insertable = false,updatable = false)
     public Long getId() {
         return id;
     }
