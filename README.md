@@ -4,9 +4,9 @@ Creating 2 API’s to Perform CRUD Operation same as Twitter / Facebook. In whic
 # so API's can be like this:
 
 
-## /user – methods (GET , POST , PUT , DELETE )
+## /api – methods (GET , POST , PUT , DELETE )
 
-## /userwall – methods (GET , POST )
+## /api/wall – methods (GET , POST )
 
 
 __Command to Build the Project__ 
