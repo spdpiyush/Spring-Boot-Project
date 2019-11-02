@@ -12,10 +12,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -85,4 +82,26 @@ public class UserWallController {
         }
         return ResponseEntity.ok().body(status);
     }
+
+    //To Get Post By Id.
+    @RequestMapping(value = "/post{postId}", method = RequestMethod.GET)
+    public ResponseEntity getPostById(@PathVariable(value = "postId") Long postId) throws Exception{
+        LOGGER.info("Get Post By Id Controller is Called");
+        try {
+            UserWall userWall = userWallDao.findOnePost(postId);
+            if(userWall == null){
+                status.setErrorCodes(ErrorCodes.POST_NOT_EXIST.getValue());
+                status.setMessage(ErrorCodes.POST_NOT_EXIST.toString());
+                LOGGER.info("Given Post Id {} doesn't exist",postId);
+            }else {
+                return ResponseEntity.ok().body(userWall);
+            }
+        }catch (Exception e){
+            status.setErrorCodes(ErrorCodes.ERROR_IN_GET_POST.getValue());
+            status.setMessage(ErrorCodes.ERROR_IN_GET_POST.toString());
+            LOGGER.error("Error Occurred in Get PostById");
+        }
+        return ResponseEntity.ok().body(status);
+    }
+
 }
