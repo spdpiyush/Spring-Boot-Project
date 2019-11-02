@@ -26,7 +26,9 @@ public enum ErrorCodes {
         ALL_POSTS_CREATED_SUCCESS(2006,"All Post Successfully Created"),
         SOME_POST_NOT_CREATED(2007,"Post Not Created for User Id : "),
         POST_NOT_EXIST(2008,"Given PostId doesn't exist"),
-        ERROR_IN_GET_POST(2009,"Error Occurred in Get Post By Id");
+        ERROR_IN_GET_POST(2009,"Error Occurred in Get Post By Id"),
+        NO_POST(3000,"No Posts are There"),
+        ERROR_IN_GET_ALL_POSTS(3001,"Error Occurred While getting all the posts");
 
         private final Integer value;
         private final String phrase;
