@@ -99,9 +99,28 @@ public class UserWallController {
         }catch (Exception e){
             status.setErrorCodes(ErrorCodes.ERROR_IN_GET_POST.getValue());
             status.setMessage(ErrorCodes.ERROR_IN_GET_POST.toString());
-            LOGGER.error("Error Occurred in Get PostById");
+            LOGGER.error("Error Occurred in Get PostById {}",e.fillInStackTrace());
         }
         return ResponseEntity.ok().body(status);
     }
-
+    //To Get all the posts
+    @RequestMapping(value = "/allposts", method = RequestMethod.GET)
+    public ResponseEntity getAllPost() throws Exception{
+        LOGGER.info("Get All Posts Controller Called");
+        try {
+            List<UserWall> userWalls = userWallDao.findAll();
+            if(userWalls == null){
+                status.setErrorCodes(ErrorCodes.NO_POST.getValue());
+                status.setMessage(ErrorCodes.NO_POST.toString());
+                LOGGER.info("No Posts are there");
+            }else {
+                return ResponseEntity.ok().body(userWalls);
+            }
+        }catch (Exception e){
+            status.setErrorCodes(ErrorCodes.ERROR_IN_GET_ALL_POSTS.getValue());
+            status.setMessage(ErrorCodes.ERROR_IN_GET_ALL_POSTS.toString());
+            LOGGER.error("Error Occurred while getting all the posts {}",e.fillInStackTrace());
+        }
+        return ResponseEntity.ok().body(status);
+    }
 }
