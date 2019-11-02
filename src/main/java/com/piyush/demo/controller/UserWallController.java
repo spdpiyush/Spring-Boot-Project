@@ -84,7 +84,7 @@ public class UserWallController {
     }
 
     //To Get Post By Id.
-    @RequestMapping(value = "/post{postId}", method = RequestMethod.GET)
+    @RequestMapping(value = "/post/{postId}", method = RequestMethod.GET)
     public ResponseEntity getPostById(@PathVariable(value = "postId") Long postId) throws Exception{
         LOGGER.info("Get Post By Id Controller is Called");
         try {
@@ -120,6 +120,27 @@ public class UserWallController {
             status.setErrorCodes(ErrorCodes.ERROR_IN_GET_ALL_POSTS.getValue());
             status.setMessage(ErrorCodes.ERROR_IN_GET_ALL_POSTS.toString());
             LOGGER.error("Error Occurred while getting all the posts {}",e.fillInStackTrace());
+        }
+        return ResponseEntity.ok().body(status);
+    }
+
+    //To Get the Posts By userId
+    @RequestMapping(value = "/posts{userId}", method = RequestMethod.GET)
+    public ResponseEntity getPostByUserId(@PathVariable Long userId) throws Exception{
+        LOGGER.info("Get Post By User Id Controller Called");
+        try {
+            if(userDao.findOne(userId) == null){
+                status.setErrorCodes(ErrorCodes.USER_NOT_PRESENT.getValue());
+                status.setMessage(ErrorCodes.USER_NOT_PRESENT.toString());
+                LOGGER.info("Given User Id {} doesn't exist",userId);
+            }else {
+                List<UserWall> userWalls = userWallDao.findByUserId(userId);
+                return ResponseEntity.ok().body(userWalls);
+            }
+        }catch (Exception e){
+            status.setErrorCodes(ErrorCodes.ERROR_IN_GET_POSTS_BY_USERID.getValue());
+            status.setMessage(ErrorCodes.ERROR_IN_GET_POSTS_BY_USERID.toString());
+            LOGGER.error("Error Occurred in get posts by userId {}",e.fillInStackTrace());
         }
         return ResponseEntity.ok().body(status);
     }
