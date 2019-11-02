@@ -21,7 +21,10 @@ public enum ErrorCodes {
         USER_DELETED(2001,"User Deleted Successfully"),
         ERROR_IN_USER_DELETION(2002,"Error Occurred in deleting the User"),
         POST_CREATED_SUCCESS(2003,"Successfully Post Created"),
-        ERROR_IN_POST_CREATE(2004,"Error Occurred while Creating the Post");
+        ERROR_IN_POST_CREATE(2004,"Error Occurred while Creating the Post"),
+        ERROR_IN_POSTS_CREATE(2005,"Error Occurred while Creating the Posts"),
+        ALL_POSTS_CREATED_SUCCESS(2006,"All Post Successfully Created"),
+        SOME_POST_NOT_CREATED(2007,"Post Not Created for User Id : ");
 
         private final Integer value;
         private final String phrase;
