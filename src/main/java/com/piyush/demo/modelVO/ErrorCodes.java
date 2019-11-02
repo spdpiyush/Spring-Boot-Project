@@ -24,7 +24,9 @@ public enum ErrorCodes {
         ERROR_IN_POST_CREATE(2004,"Error Occurred while Creating the Post"),
         ERROR_IN_POSTS_CREATE(2005,"Error Occurred while Creating the Posts"),
         ALL_POSTS_CREATED_SUCCESS(2006,"All Post Successfully Created"),
-        SOME_POST_NOT_CREATED(2007,"Post Not Created for User Id : ");
+        SOME_POST_NOT_CREATED(2007,"Post Not Created for User Id : "),
+        POST_NOT_EXIST(2008,"Given PostId doesn't exist"),
+        ERROR_IN_GET_POST(2009,"Error Occurred in Get Post By Id");
 
         private final Integer value;
         private final String phrase;
