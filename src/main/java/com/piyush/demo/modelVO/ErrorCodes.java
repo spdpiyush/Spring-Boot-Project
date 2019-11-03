@@ -33,7 +33,8 @@ public enum ErrorCodes {
         POST_UPDATED(3003,"Post Updated Successfully "),
         ERROR_IN_POST_UPDATE(3004,"Error Occurred in Post Update"),
         POST_DELETED(3005,"Post Deleted Successfully"),
-        ERROR_IN_POST_DELETE(3006,"Error in Post Deletion");
+        ERROR_IN_POST_DELETE(3006,"Error in Post Deletion"),
+        POST_NOT_EXIST_FOR_USERID(3007,"Post Doesn't exists for the given UserId");
 
         private final Integer value;
         private final String phrase;

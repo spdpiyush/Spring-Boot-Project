@@ -198,7 +198,31 @@ public class UserWallController {
         }catch (Exception e){
             status.setErrorCodes(ErrorCodes.ERROR_IN_POST_DELETE.getValue());
             status.setMessage(ErrorCodes.ERROR_IN_POST_DELETE.toString());
-            LOGGER.error("Error Occurred in Post Delete by postId");
+            LOGGER.error("Error Occurred in Post Delete by postId {}",e.fillInStackTrace());
+        }
+        return ResponseEntity.ok().body(status);
+    }
+
+    //To Delete Post By UserId
+    @RequestMapping(value = "posts/{userId}", method = RequestMethod.DELETE)
+    public ResponseEntity deletePostByUserId(@PathVariable (value = "userId") Long userId) throws Exception{
+        LOGGER.info("Delete Post By UserId Called");
+        try {
+            List<UserWall> userWalls = userWallDao.findByUserId(userId);
+            if(userWalls == null){
+                status.setErrorCodes(ErrorCodes.POST_NOT_EXIST_FOR_USERID.getValue());
+                status.setMessage(ErrorCodes.POST_NOT_EXIST_FOR_USERID.toString());
+                LOGGER.info("No Post is There for the Given UserID");
+            }else {
+                userWallDao.deletePostByUserId(userWalls);
+                status.setErrorCodes(ErrorCodes.POST_DELETED.getValue());
+                status.setMessage(ErrorCodes.POST_DELETED.toString());
+                LOGGER.info("Posts Deleted for the Given UserId");
+            }
+        }catch (Exception e){
+            status.setErrorCodes(ErrorCodes.ERROR_IN_POST_DELETE.getValue());
+            status.setMessage(ErrorCodes.ERROR_IN_POST_DELETE.toString());
+            LOGGER.error("Error Occurred in Post Deletion by userID {}",e.fillInStackTrace());
         }
         return ResponseEntity.ok().body(status);
     }

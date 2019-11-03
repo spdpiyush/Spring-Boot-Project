@@ -42,4 +42,8 @@ public class UserWallDao {
     public void deletePost(UserWall userWall){
         userWallRepository.delete(userWall);
     }
+
+    public void deletePostByUserId(List<UserWall> userWalls){
+        userWallRepository.deleteAll(userWalls);
+    }
 }
