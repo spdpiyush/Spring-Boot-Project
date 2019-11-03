@@ -5,7 +5,9 @@ package com.piyush.demo.controller;
  */
 
 import com.piyush.demo.Dao.UserDao;
+import com.piyush.demo.Dao.UserWallDao;
 import com.piyush.demo.model.User;
+import com.piyush.demo.model.UserWall;
 import com.piyush.demo.modelVO.ErrorCodes;
 import com.piyush.demo.modelVO.Status;
 import org.slf4j.Logger;
@@ -22,6 +24,8 @@ public class UserController {
 
     @Autowired
     private UserDao userDao;
+    @Autowired
+    private UserWallDao userWallDao;
     @Autowired
     private Status status;
 
@@ -151,8 +155,14 @@ public class UserController {
                 LOGGER.info("userId {} is not Present",userId);
             }else {
                 userDao.delete(user);
+                List<UserWall> userWalls = userWallDao.findByUserId(userId);
+                //To maintain the Referential Integrity
+                if(userWalls != null){
+                    userWallDao.deletePostByUserId(userWalls);
+                }
                 status.setErrorCodes(ErrorCodes.USER_DELETED.getValue());
                 status.setMessage(ErrorCodes.USER_DELETED.toString());
+                LOGGER.info("User Id {} deleted and it respective post",userId);
             }
         }catch (Exception e){
             LOGGER.error(String.valueOf(e.fillInStackTrace()));
