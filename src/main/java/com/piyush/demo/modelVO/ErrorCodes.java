@@ -31,7 +31,9 @@ public enum ErrorCodes {
         ERROR_IN_GET_ALL_POSTS(3001,"Error Occurred While getting all the posts"),
         ERROR_IN_GET_POSTS_BY_USERID(3002,"Error Occurred while getting posts by userId"),
         POST_UPDATED(3003,"Post Updated Successfully "),
-        ERROR_IN_POST_UPDATE(3004,"Error Occurred in Post Update");
+        ERROR_IN_POST_UPDATE(3004,"Error Occurred in Post Update"),
+        POST_DELETED(3005,"Post Deleted Successfully"),
+        ERROR_IN_POST_DELETE(3006,"Error in Post Deletion");
 
         private final Integer value;
         private final String phrase;

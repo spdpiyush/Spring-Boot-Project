@@ -179,4 +179,27 @@ public class UserWallController {
         return ResponseEntity.ok().body(status);
     }
 
+    //To Delete Post By PostId
+    @RequestMapping(value = "/post/{postId}", method = RequestMethod.DELETE)
+    public ResponseEntity deletePostByPostId(@PathVariable (value = "postId") Long postId) throws Exception{
+        LOGGER.info("Delete Post by postId Called");
+        try {
+            UserWall userWall = userWallDao.findOnePost(postId);
+            if (userWall == null){
+                status.setErrorCodes(ErrorCodes.POST_NOT_EXIST.getValue());
+                status.setMessage(ErrorCodes.POST_NOT_EXIST.toString());
+                LOGGER.info("Given postId {} Doesn't Exist",postId);
+            }else {
+                userWallDao.deletePost(userWall);
+                status.setErrorCodes(ErrorCodes.POST_DELETED.getValue());
+                status.setMessage(ErrorCodes.POST_DELETED.toString());
+                LOGGER.info("Post Deleted Successfully");
+            }
+        }catch (Exception e){
+            status.setErrorCodes(ErrorCodes.ERROR_IN_POST_DELETE.getValue());
+            status.setMessage(ErrorCodes.ERROR_IN_POST_DELETE.toString());
+            LOGGER.error("Error Occurred in Post Delete by postId");
+        }
+        return ResponseEntity.ok().body(status);
+    }
 }
