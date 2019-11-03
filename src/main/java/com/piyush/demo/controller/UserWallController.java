@@ -144,4 +144,39 @@ public class UserWallController {
         }
         return ResponseEntity.ok().body(status);
     }
+
+    //To Update the post by postId
+    @RequestMapping(value = "/post/{postId}", method = RequestMethod.PUT)
+    public ResponseEntity updatePost(@PathVariable (value = "postId") Long postId,
+                                     @RequestBody UserWall userWall) throws Exception{
+        LOGGER.info("Update Post Controller Called");
+        try {
+            if(userWallDao.findOnePost(postId) == null){
+                status.setErrorCodes(ErrorCodes.POST_NOT_EXIST.getValue());
+                status.setMessage(ErrorCodes.POST_NOT_EXIST.toString());
+                LOGGER.info("Given Post Id {} doesn't exist",postId);
+            }else {
+                if(userDao.findOne(userWall.getUserId()) == null){
+                    status.setErrorCodes(ErrorCodes.USER_NOT_PRESENT.getValue());
+                    status.setMessage(ErrorCodes.USER_NOT_PRESENT.toString());
+                    LOGGER.info("Given userId for the post doesn't exist in userProfile");
+                }else {
+                    UserWall newUserWall = userWallDao.findOnePost(postId);
+                    newUserWall.setUserId(userWall.getUserId());
+                    newUserWall.setPost(userWall.getPost());
+                    newUserWall.setPostDate(userWall.getPostDate());
+                    userWallDao.save(newUserWall);
+                    status.setErrorCodes(ErrorCodes.POST_UPDATED.getValue());
+                    status.setMessage(ErrorCodes.POST_UPDATED.toString());
+                    LOGGER.info("Post Updated {}",newUserWall);
+                }
+            }
+        }catch (Exception e){
+            status.setErrorCodes(ErrorCodes.ERROR_IN_POST_UPDATE.getValue());
+            status.setMessage(ErrorCodes.ERROR_IN_POST_UPDATE.toString());
+            LOGGER.error("Error Occurred while Updating Post {}",e.fillInStackTrace());
+        }
+        return ResponseEntity.ok().body(status);
+    }
+
 }

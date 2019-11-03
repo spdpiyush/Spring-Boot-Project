@@ -29,7 +29,9 @@ public enum ErrorCodes {
         ERROR_IN_GET_POST(2009,"Error Occurred in Get Post By Id"),
         NO_POST(3000,"No Posts are There"),
         ERROR_IN_GET_ALL_POSTS(3001,"Error Occurred While getting all the posts"),
-        ERROR_IN_GET_POSTS_BY_USERID(3002,"Error Occurred while getting posts by userId");
+        ERROR_IN_GET_POSTS_BY_USERID(3002,"Error Occurred while getting posts by userId"),
+        POST_UPDATED(3003,"Post Updated Successfully "),
+        ERROR_IN_POST_UPDATE(3004,"Error Occurred in Post Update");
 
         private final Integer value;
         private final String phrase;
