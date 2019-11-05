@@ -104,6 +104,32 @@ public class User implements Serializable {
                 ", dob=" + dob +
                 '}';
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        User user = (User) o;
+
+        if (!id.equals(user.id)) return false;
+        if (!name.equals(user.name)) return false;
+        if (!address.equals(user.address)) return false;
+        if (contactNo != null ? !contactNo.equals(user.contactNo) : user.contactNo != null) return false;
+        if (!email.equals(user.email)) return false;
+        return dob.equals(user.dob);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id.hashCode();
+        result = 31 * result + name.hashCode();
+        result = 31 * result + address.hashCode();
+        result = 31 * result + (contactNo != null ? contactNo.hashCode() : 0);
+        result = 31 * result + email.hashCode();
+        result = 31 * result + dob.hashCode();
+        return result;
+    }
 }
 
 

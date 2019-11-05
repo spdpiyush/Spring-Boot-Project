@@ -74,4 +74,26 @@ public class UserWall implements Serializable {
                 ", postDate=" + postDate +
                 '}';
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        UserWall userWall = (UserWall) o;
+
+        if (!postId.equals(userWall.postId)) return false;
+        if (!userId.equals(userWall.userId)) return false;
+        if (post != null ? !post.equals(userWall.post) : userWall.post != null) return false;
+        return postDate.equals(userWall.postDate);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = postId.hashCode();
+        result = 31 * result + userId.hashCode();
+        result = 31 * result + (post != null ? post.hashCode() : 0);
+        result = 31 * result + postDate.hashCode();
+        return result;
+    }
 }
