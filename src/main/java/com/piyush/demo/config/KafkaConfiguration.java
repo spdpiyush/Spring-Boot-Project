@@ -44,6 +44,7 @@ public class KafkaConfiguration {
         return new KafkaProducer<String, String>(kafkaProducerConfig());
     }
 
+    @Bean
     public KafkaConsumer<String, String> createKafkaConsumer(){
         return new KafkaConsumer<String, String>(kafkaConsumerConfig());
     }
